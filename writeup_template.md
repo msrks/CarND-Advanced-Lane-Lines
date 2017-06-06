@@ -58,11 +58,9 @@ The code for this step is contained in `1_CameraCalib.ipynb` .
 
 <img src="./output_images/test2_undist_for_submission.jpg" width="700">
 
----
-
 #### 2. how to create a thresholded binary image.
 
-The code for this step is contained in `2_Thresholding.ipynb` . I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # 5).
+The code for this step is contained in `2_Thresholding.ipynb` . I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at cell # 5).
 
 <img src="./output_images/test2_threshold_for_submission.jpg" width="700">
 
@@ -104,21 +102,36 @@ dst = np.float32(
 
 #### 4. how I identified lane-line pixels and fit their positions with a polynomial
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+The code for this step is contained in `4_LaneFinding.ipynb` .
 
-test2_perspective_transformed
+1. read the thresholded binary image (cell # 1)
+2. sum up pixel values through y-axis within window (cell # 2)
+3. treat argmax_x(sumed up pixel values) as lane center (cell # 3)
+4. apply sliding window along y-axis (cell # 3)
+5. fit polynomial (cell # 3)
+6. visualize result (cell # 4)
 
-![alt text][image5]
+<img src="./output_images/test2_line_detection_for_submission.jpg" width="300">
 
-#### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+#### 5. how I calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+The code for this step is contained in `4_LaneFinding.ipynb` .
 
-#### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+**calculate the radius of curvature of the lane (cell # 5)**
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+I used the following formula
 
-![alt text][image6]
+<img src="./examples/calc_radius_of_lane.png" width="600">
+
+**calculate the position of the vehicle with respect to center (cell # 6)**
+
+I calculated the position of the vehicle using the distance from lane center to image center
+
+#### 6. my result plotted back down onto the road such that the lane area is identified clearly.
+
+The code for this step is contained in `4_LaneFinding.ipynb` (cell # 7 - # 9).
+
+<img src="./output_images/test2_draw_back_for_submission.jpg" width="300">
 
 ---
 
