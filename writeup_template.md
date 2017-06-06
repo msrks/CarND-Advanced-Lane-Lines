@@ -15,7 +15,7 @@ The goals / steps of this project are the following:
 
 #### 1. How I computed the camera matrix and distortion coefficients.
 
-The code for this step is contained in `1_camera_calib.ipynb` .  
+The code for this step is contained in `1_CameraCalib.ipynb` .  
 
 I used [chessboard pattern](http://docs.opencv.org/2.4/_downloads/pattern.png). The process is ..
 
@@ -54,35 +54,38 @@ dst = cv2.undistort(img, mtx, dist, None, mtx)
 
 #### 1. distortion-corrected image
 
-The code for this step is contained in `1_camera_calib.ipynb` .
+The code for this step is contained in `1_CameraCalib.ipynb` .
 
 <img src="./output_images/test2_undist_for_submission.jpg" width="700">
 
 ---
 
-#### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
+#### 2. how to create a thresholded binary image.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+The code for this step is contained in `2_Thresholding.ipynb` . I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # 5).
 
-![alt text][image3]
+<img src="./output_images/test2_threshold_for_submission.jpg" width="700">
 
 #### 3. how I performed a perspective transform
+
+The code for this step is contained in `3_PerspectiveTransform.ipynb` .
+
+I have adjusted the coordinates (`src`, `dst`) so that the dst lane line in `output_images/straight_lines1_undist.jpg` and `output_images/straight_lines2_undist.jpg` looks straight.
 
 ```
 M = cv2.getPerspectiveTransform(src, dst)
 warped = cv2.warpPerspective(img, M, img_size, flags=cv2.INTER_LINEAR)
 ```
 
----
+the final parameter is the following ... :
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
-
-```python
+```
+img_size=(img.shape[1], img.shape[0])    
 src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
-    [((img_size[0] / 6) - 10), img_size[1]],
-    [(img_size[0] * 5 / 6) + 60, img_size[1]],
-    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
+    [[(img_size[0] / 2) - 59, img_size[1] / 2 + 100],
+    [((img_size[0] / 6) - 6), img_size[1]],
+    [(img_size[0] * 5 / 6) + 50, img_size[1]],
+    [(img_size[0] / 2 + 64), img_size[1] / 2 + 100]])
 dst = np.float32(
     [[(img_size[0] / 4), 0],
     [(img_size[0] / 4), img_size[1]],
@@ -90,22 +93,20 @@ dst = np.float32(
     [(img_size[0] * 3 / 4), 0]])
 ```
 
-This resulted in the following source and destination points:
-
 | Source        | Destination   |
 |:-------------:|:-------------:|
-| 585, 460      | 320, 0        |
-| 203, 720      | 320, 720      |
-| 1127, 720     | 960, 720      |
-| 695, 460      | 960, 0        |
+| 581, 460      | 320, 0        |
+| 207.3, 720    | 320, 720      |
+| 1116.7, 720   | 960, 720      |
+| 704, 460      | 960, 0        |
 
-I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
+<img src="./output_images/test2_perspective_transformed_for_submission.jpg" width="700">
 
-![alt text][image4]
-
-#### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
+#### 4. how I identified lane-line pixels and fit their positions with a polynomial
 
 Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+
+test2_perspective_transformed
 
 ![alt text][image5]
 
