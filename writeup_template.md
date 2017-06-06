@@ -56,7 +56,7 @@ dst = cv2.undistort(img, mtx, dist, None, mtx)
 
 The code for this step is contained in `1_camera_calib.ipynb` .
 
-<img src="./output_images/test2_undist.jpg" width="700">
+<img src="./output_images/test2_undist_for_submission.jpg" width="700">
 
 ---
 
