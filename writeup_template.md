@@ -111,7 +111,7 @@ The code for this step is contained in `4_LaneFinding.ipynb` .
 5. fit polynomial (cell # 3)
 6. visualize result (cell # 4)
 
-<img src="./output_images/test2_line_detection_for_submission.jpg" width="400">
+<img src="./output_images/test2_line_detection_for_submission.jpg" width="500">
 
 #### 5. how I calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
@@ -131,7 +131,7 @@ I calculated the position of the vehicle using the distance from lane center to 
 
 The code for this step is contained in `4_LaneFinding.ipynb` (cell # 7 - # 9).
 
-<img src="./output_images/test2_draw_back_for_submission.jpg" width="400">
+<img src="./output_images/test2_draw_back_for_submission.jpg" width="500">
 
 ---
 
